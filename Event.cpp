@@ -12,7 +12,7 @@ void Event::setDay(int d) {
 
 void Event::setMonth(int m) {
 
-    date->tm_mon=m+1;
+    date->tm_mon=m;
 
 }
 
@@ -24,7 +24,7 @@ void Event::setYear(int y) {
 
 void Event::setHour(int h, int m) {
 
-    date->tm_hour=h+4;
+    date->tm_hour=h;
     date->tm_min=m;
 
 }
@@ -60,6 +60,24 @@ Event::Event(string e): eventText(move(e)) {
     date->tm_year+=1900;
     date->tm_mon+=1;
 
+}
+
+bool Event::operator==(const Event &e) {
+
+    return eventText==e.eventText;
+}
+
+int Event::getDay() const {
+
+    return date->tm_mday;
+}
+
+int Event::getMonth() const {
+    return date->tm_mon;
+}
+
+int Event::getYear() const {
+    return date->tm_year;
 }
 
 

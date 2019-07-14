@@ -7,6 +7,7 @@
 
 #include <time.h>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 const char d_space='/';
@@ -31,7 +32,12 @@ public:
 
     string getDate()const;
     string getEvent()const;
+    int getDay()const;
+    int getMonth()const;
+    int getYear()const;
 
+
+    bool operator==(const Event& e);
 
 private:
     tm* date;
