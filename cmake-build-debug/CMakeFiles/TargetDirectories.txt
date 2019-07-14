@@ -1,0 +1,3 @@
+C:/Users/girol/Desktop/EventManager/cmake-build-debug/CMakeFiles/EventManager.dir
+C:/Users/girol/Desktop/EventManager/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/girol/Desktop/EventManager/cmake-build-debug/CMakeFiles/rebuild_cache.dir

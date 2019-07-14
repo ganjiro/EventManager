@@ -9,6 +9,9 @@
 #include <iostream>
 using namespace std;
 
+const char d_space='/';
+const char h_space=':';
+const char e_space='-';
 
 
 
@@ -16,7 +19,8 @@ class Event {
 public:
 
     Event(){ date=new tm; };
-    explicit Event(string e, tm* d=gmtime(nullptr)):eventText(std::move(e)),date(d){};
+    explicit Event(string e, tm* d): eventText(move(e)), date(d){};
+    explicit Event(string e);
 
     void setDay(int d);
     void setMonth(int m);
