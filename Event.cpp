@@ -6,7 +6,7 @@
 
 void Event::setDay(int d) {
 
-    date->tm_mday=d;
+    this->date->tm_mday=d;
 
 }
 
@@ -54,11 +54,19 @@ string Event::getEvent() const{
 
 Event::Event(string e): eventText(move(e)) {
     auto now=time(nullptr);
-    date=gmtime(&now);
 
-    date->tm_hour+=4;
-    date->tm_year+=1900;
-    date->tm_mon+=1;
+    tm* a=gmtime(&now);
+
+    a->tm_hour+=4;
+    a->tm_year+=1900;
+    a->tm_mon+=1;
+
+    date= new tm;
+    date->tm_hour=a->tm_hour;
+    date->tm_min=a->tm_min;
+    date->tm_year=a->tm_year;
+    date->tm_mon=a->tm_mon;
+    date->tm_mday=a->tm_mday;
 
 }
 
@@ -85,6 +93,17 @@ int Event::getMonth() const {
 
 int Event::getYear() const {
     return date->tm_year;
+}
+
+string Event::getOutputDate() const {
+    string ris;
+
+    ris=to_string(date->tm_mday)+"/";
+    ris+=to_string(date->tm_mon)+"/";
+    ris+=to_string(date->tm_year)+';';
+    ris+=to_string(date->tm_hour)+":";
+    ris+=to_string(date->tm_min);
+    return ris;
 }
 
 

@@ -1,9 +1,7 @@
-23/07/1999;03:30;magnw
-16/10/2999;13:30;Ciao mamma
-16/10/11312;13:30;salve
-cmake_minimum_required(VERSION 3.14)
-pro16/7/2019 16:52;magnw
-16/7/2019 16:52;Ciao mamma
-16/7/2019 16:52;salve
-
-ager main.cpp Event.cpp Event.h EventManager.cpp EventManager.h)
+11/10/2121;4:59;Tesfdsat
+22/10/2121;4:59;Testatatat
+11/10/2121;4:59;Tesfdt
+11/10/2121;4:59;Tesfft
+16/7/2019;19:34;Test
+16/7/2019;19:34;Test
+16/7/2019;19:34;ciao

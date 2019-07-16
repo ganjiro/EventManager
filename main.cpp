@@ -1,12 +1,15 @@
 #include <iostream>
 #include <memory>
 #include "EventManager.h"
-int main() {
 
-    auto a=make_unique<EventManager>();
+int main() {
+    auto a=new EventManager();
 
     a->printAllEvents();
 
 
-    return 0;
+    int x=a->searchEvent("ciao");
+    delete a;
+
+    return x;
 }

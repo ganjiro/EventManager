@@ -15,7 +15,6 @@ const char h_space=':';
 const char csv_space=';';
 
 
-
 class Event {
 public:
 
@@ -36,6 +35,7 @@ public:
     int getDay()const;
     int getMonth()const;
     int getYear()const;
+    string getOutputDate()const;
 
 
     bool operator==(const Event& e);

@@ -20,7 +20,7 @@ void EventManager::loadLines() {
             a = line.find(csv_space);
             ora=line.substr(0, a);
             evento = line.substr(a + 1);
-            auto event = new Event(evento);
+            Event* event = new Event(evento);
 
 
             a = data.find(d_space);
@@ -39,8 +39,10 @@ void EventManager::loadLines() {
             auto c = ora.substr(a, ora.length());
             event->setHour(stoi(ora.substr(0, a)), stoi(ora.substr(a + 1, ora.length())));
 
-            events.push_back(event);
+            events.emplace_back(event);
+
         }
+
     }
     catch (exception& e){
         cerr<<"Corrupted line "<<linecount<<endl;
@@ -49,11 +51,14 @@ void EventManager::loadLines() {
 
 EventManager::~EventManager() {
     string line;
-    saveFile.clear();
-    for(const auto itr: events) {
-        line="";
-        line=(*itr).getDate()+csv_space+(*itr).getEvent()+'\n';
-        saveFile << line;
+    saveFile.open("..\\Utils\\Events.txt",ios::out | ios::trunc);
+    if (saveFile) {
+        for(const auto itr: events) {
+            line = "";
+            line = (*itr).getOutputDate() + csv_space + (*itr).getEvent() + '\n';
+            saveFile << line;
+        }
+        saveFile.close();
     }
 }
 
@@ -62,11 +67,12 @@ int EventManager::searchEvent(string e) {
     for(const auto itr : events){
         i++;
         if (itr->getEvent()==e){
-            break;
 
+            return i;
         }
 
     }
+    i=-1;
     return i;
 }
 
@@ -96,7 +102,7 @@ void EventManager::newEvent(string e, int d, int m, int y, int h, int mi) {
     tmp->setYear(y);
     tmp->setHour(h,mi);
 
-    events.push_back(tmp);
+    events.emplace_back(tmp);
 
 }
 
@@ -219,6 +225,18 @@ void EventManager::printAllEvents() {
         cout<<(*itr).getDate()<<' '<<(*itr).getEvent()<<endl;
     }
 
+}
+
+string EventManager::getEventDate(string e) {
+    return std::__cxx11::string();
+}
+
+string EventManager::getEventDate(int i) {
+    return std::__cxx11::string();
+}
+
+string EventManager::getEventText(int i) {
+    return std::__cxx11::string();
 }
 
 

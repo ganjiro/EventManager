@@ -15,9 +15,16 @@ public:
         saveFile.open("..\\Utils\\Events.txt");
         if (saveFile) {
             loadLines();
+            saveFile.close();
         }
     }
-
+    explicit EventManager(string path){
+        saveFile.open(path);
+        if (saveFile) {
+            loadLines();
+            saveFile.close();
+        }
+    }
 
     void loadLines();
 
@@ -43,11 +50,11 @@ public:
     void printEvents(int d, int m );
     void printAllEvents();
 
+    string getEventDate(string e);
+    string getEventDate(int i);
+    string getEventText(int i);
 
-
-
-
-    virtual ~EventManager();
+    ~EventManager();
 
 private:
 
