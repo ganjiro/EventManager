@@ -12,15 +12,17 @@
 class EventManager {
 public:
     EventManager(){
-        saveFile.open("..\\Utils\\Events.txt", ios_base::app);
-        loadLines();
+        saveFile.open("..\\Utils\\Events.txt");
+        if (saveFile) {
+            loadLines();
+        }
     }
 
 
     void loadLines();
 
     int searchEvent(string e);
-    void searchEvents(int d, int m );
+
 
     void newEvent(string e, tm* d);
     void newEvent(string e, int d, int m, int y, int h, int mi);
@@ -35,18 +37,22 @@ public:
 
     void deleteEvent(string e);
     void deleteEvent(int indice);
-    bool editEventDate( int d, int m, int y, int h, int mi);
-    bool editEventDate(tm* d);
+
+    void printevent(string e);
+    void printevent(int indice);
+    void printEvents(int d, int m );
+    void printAllEvents();
 
 
-    vector<Event*> events;
+
+
 
     virtual ~EventManager();
 
 private:
 
     fstream saveFile;
-
+    vector<Event*> events;
 
 };
 

@@ -1,7 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/EventManager.dir/main.cpp.obj"
-  "CMakeFiles/EventManager.dir/Event.cpp.obj"
-  "CMakeFiles/EventManager.dir/EventManager.cpp.obj"
   "EventManager.pdb"
   "EventManager.exe"
   "EventManager.exe.manifest"

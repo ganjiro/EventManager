@@ -5,6 +5,8 @@ int main() {
 
     auto a=make_unique<EventManager>();
 
-    cout<<a->events[1]->getDate();
+    a->printAllEvents();
+
+
     return 0;
 }

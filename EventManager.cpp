@@ -8,30 +8,36 @@ int linecount=0;
 void EventManager::loadLines() {
     try {
         linecount=0;
-        string line;
+        string line,data,ora,evento;
         int a;
         while (getline(saveFile, line)) {
             linecount++;
-            a = line.find(e_space);
+            a = line.find(csv_space);
 
-            auto event = new Event(line.substr(a + 1));
-            line = line.substr(0, a);
 
-            a = line.find(d_space);
-            event->setDay(stoi(line.substr(0, a)));
+            data=line.substr(0, a);
             line = line.substr(a + 1);
+            a = line.find(csv_space);
+            ora=line.substr(0, a);
+            evento = line.substr(a + 1);
+            auto event = new Event(evento);
 
-            a = line.find(d_space);
-            event->setMonth(stoi(line.substr(0, a)));
-            line = line.substr(a + 1);
 
-            a = line.find(d_space);
-            event->setYear(stoi(line.substr(0, a)));
-            line = line.substr(a + 1);
+            a = data.find(d_space);
+            event->setDay(stoi(data.substr(0, a)));
+            data = data.substr(a + 1);
 
-            a = line.find(h_space);
-            auto c = line.substr(a, line.length());
-            event->setHour(stoi(line.substr(0, a)), stoi(line.substr(a + 1, line.length())));
+            a = data.find(d_space);
+            event->setMonth(stoi(data.substr(0, a)));
+            data = data.substr(a + 1);
+
+            a = data.find(d_space);
+            event->setYear(stoi(data.substr(0, a)));
+            data = data.substr(a + 1);
+
+            a = ora.find(h_space);
+            auto c = ora.substr(a, ora.length());
+            event->setHour(stoi(ora.substr(0, a)), stoi(ora.substr(a + 1, ora.length())));
 
             events.push_back(event);
         }
@@ -46,9 +52,8 @@ EventManager::~EventManager() {
     saveFile.clear();
     for(const auto itr: events) {
         line="";
-        line=(*itr).getDate()+" / ";
-        line+=(*itr).getEvent();
-        saveFile << (*itr).getDate();
+        line=(*itr).getDate()+csv_space+(*itr).getEvent()+'\n';
+        saveFile << line;
     }
 }
 
@@ -65,7 +70,7 @@ int EventManager::searchEvent(string e) {
     return i;
 }
 
-void EventManager::searchEvents(int d, int m) {
+void EventManager::printEvents(int d, int m) {
 
 
     for(const auto itr : events) {
@@ -79,13 +84,13 @@ void EventManager::searchEvents(int d, int m) {
 
 void EventManager::newEvent(string e, tm *d) {
 
-    events.push_back(new Event(e,d));
+    events.push_back(new Event(move(e),d));
 
 }
 
 void EventManager::newEvent(string e, int d, int m, int y, int h, int mi) {
 
-    auto tmp = new Event(e);
+    auto tmp = new Event(move(e));
     tmp->setDay(d);
     tmp->setMonth(m);
     tmp->setYear(y);
@@ -97,44 +102,124 @@ void EventManager::newEvent(string e, int d, int m, int y, int h, int mi) {
 
 void EventManager::newEvent(string e) {
 
+    events.push_back(new Event(move(e)));
+
 }
 
 bool EventManager::editEvent(string old_e, string e) {
-    return false;
+    auto ris=false;
+    auto itr=find(events.begin(),events.end(), new Event(move(old_e)));
+
+    if (*itr != nullptr){
+        ris=true;
+        (*itr)->setEvent(move(e));
+
+    }
+
+    return ris;
 }
 
 bool EventManager::editEvent(int indice, string e) {
-    return false;
+    auto ris=false;
+    if (events[indice]!= nullptr){
+        ris=true;
+        events[indice]->setEvent(move(e));
+    }
+
+    return ris;
 }
 
 bool EventManager::editEventDate(string old_e, int d, int m, int y, int h, int mi) {
-    return false;
+    auto ris=false;
+    auto itr=find(events.begin(),events.end(), new Event(move(old_e)));
+
+    if (*itr != nullptr) {
+        ris = true;
+        (*itr)->setHour(h,mi);
+        (*itr)->setMonth(m);
+        (*itr)->setYear(y);
+        (*itr)->setDay(d);
+    }
+    return ris;
 }
 
 bool EventManager::editEventDate(int indice, int d, int m, int y, int h, int mi) {
-    return false;
+
+    auto ris=false;
+    if (events[indice]!= nullptr){
+        ris=true;
+        events[indice]->setHour(h,mi);
+        events[indice]->setMonth(m);
+        events[indice]->setYear(y);
+        events[indice]->setDay(d);
+    }
+
+    return ris;
 }
 
 bool EventManager::editEventDate(string old_e, tm *d) {
-    return false;
+    auto ris=false;
+    auto itr=find(events.begin(),events.end(), new Event(move(old_e)));
+
+    if (*itr != nullptr) {
+        ris = true;
+        (*itr)->setdate(d);
+    }
+
+    return ris;
 }
 
 bool EventManager::editEventDate(int indice, tm *d) {
-    return false;
+    auto ris=false;
+    if (events[indice]!= nullptr){
+        ris=true;
+        events[indice]->setdate(d);
+
+    }
+    return ris;
 }
 
 void EventManager::deleteEvent(string e) {
 
+    auto itr = find(events.begin(),events.end(),new Event(move(e)));
+    if(*itr!= nullptr) {
+        events.erase(itr);
+    }
 }
 
 void EventManager::deleteEvent(int indice) {
 
+    if (events[indice]!= nullptr){
+        events.erase(find(events.begin(),events.end(),events[indice]));
+    }
+
 }
 
-bool EventManager::editEventDate(int d, int m, int y, int h, int mi) {
-    return false;
+void EventManager::printevent(string e) {
+
+    auto itr = find(events.begin(),events.end(),new Event(move(e)));
+    if(*itr!= nullptr) {
+        cout<<(*itr)->getDate()<<' '<<(*itr)->getEvent()<<endl;
+    }
+
+
 }
 
-bool EventManager::editEventDate(tm *d) {
-    return false;
+void EventManager::printevent(int indice) {
+
+    if (events[indice]!= nullptr){
+        cout<<events[indice]->getDate()<<' '<<events[indice]->getEvent()<<endl;
+    }
+
 }
+
+void EventManager::printAllEvents() {
+
+    for (auto itr: events){
+        cout<<(*itr).getDate()<<' '<<(*itr).getEvent()<<endl;
+    }
+
+}
+
+
+

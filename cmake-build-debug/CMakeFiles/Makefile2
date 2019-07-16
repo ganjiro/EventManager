@@ -64,13 +64,50 @@ CMAKE_SOURCE_DIR = C:\Users\girol\Desktop\EventManager
 CMAKE_BINARY_DIR = C:\Users\girol\Desktop\EventManager\cmake-build-debug
 
 #=============================================================================
+# Target rules for target CMakeFiles/core.dir
+
+# All Build rule for target.
+CMakeFiles/core.dir/all:
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/depend
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=6,7,8 "Built target core"
+.PHONY : CMakeFiles/core.dir/all
+
+# Include target in all.
+all: CMakeFiles/core.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/core.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 3
+	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/core.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 0
+.PHONY : CMakeFiles/core.dir/rule
+
+# Convenience name for target.
+core: CMakeFiles/core.dir/rule
+
+.PHONY : core
+
+# clean rule for target.
+CMakeFiles/core.dir/clean:
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/clean
+.PHONY : CMakeFiles/core.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/core.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/EventManager.dir
 
 # All Build rule for target.
-CMakeFiles/EventManager.dir/all:
+CMakeFiles/EventManager.dir/all: CMakeFiles/core.dir/all
 	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/depend
 	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4 "Built target EventManager"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target EventManager"
 .PHONY : CMakeFiles/EventManager.dir/all
 
 # Include target in all.
@@ -80,7 +117,7 @@ all: CMakeFiles/EventManager.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/EventManager.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 5
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/EventManager.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/EventManager.dir/rule
@@ -97,6 +134,159 @@ CMakeFiles/EventManager.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/EventManager.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory TEST
+
+# Convenience name for "all" pass in the directory.
+TEST/all: TEST/CMakeFiles/Test.dir/all
+TEST/all: TEST/lib/googletest/all
+
+.PHONY : TEST/all
+
+# Convenience name for "clean" pass in the directory.
+TEST/clean: TEST/CMakeFiles/Test.dir/clean
+TEST/clean: TEST/lib/googletest/clean
+
+.PHONY : TEST/clean
+
+# Convenience name for "preinstall" pass in the directory.
+TEST/preinstall: TEST/lib/googletest/preinstall
+
+.PHONY : TEST/preinstall
+
+#=============================================================================
+# Target rules for target TEST/CMakeFiles/Test.dir
+
+# All Build rule for target.
+TEST/CMakeFiles/Test.dir/all: CMakeFiles/core.dir/all
+TEST/CMakeFiles/Test.dir/all: TEST/lib/googletest/CMakeFiles/gtest.dir/all
+TEST/CMakeFiles/Test.dir/all: TEST/lib/googletest/CMakeFiles/gtest_main.dir/all
+	$(MAKE) -f TEST\CMakeFiles\Test.dir\build.make TEST/CMakeFiles/Test.dir/depend
+	$(MAKE) -f TEST\CMakeFiles\Test.dir\build.make TEST/CMakeFiles/Test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=3,4,5 "Built target Test"
+.PHONY : TEST/CMakeFiles/Test.dir/all
+
+# Include target in all.
+all: TEST/CMakeFiles/Test.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+TEST/CMakeFiles/Test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 10
+	$(MAKE) -f CMakeFiles\Makefile2 TEST/CMakeFiles/Test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 0
+.PHONY : TEST/CMakeFiles/Test.dir/rule
+
+# Convenience name for target.
+Test: TEST/CMakeFiles/Test.dir/rule
+
+.PHONY : Test
+
+# clean rule for target.
+TEST/CMakeFiles/Test.dir/clean:
+	$(MAKE) -f TEST\CMakeFiles\Test.dir\build.make TEST/CMakeFiles/Test.dir/clean
+.PHONY : TEST/CMakeFiles/Test.dir/clean
+
+# clean rule for target.
+clean: TEST/CMakeFiles/Test.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory TEST/lib/googletest
+
+# Convenience name for "all" pass in the directory.
+TEST/lib/googletest/all: TEST/lib/googletest/CMakeFiles/gtest.dir/all
+TEST/lib/googletest/all: TEST/lib/googletest/CMakeFiles/gtest_main.dir/all
+
+.PHONY : TEST/lib/googletest/all
+
+# Convenience name for "clean" pass in the directory.
+TEST/lib/googletest/clean: TEST/lib/googletest/CMakeFiles/gtest.dir/clean
+TEST/lib/googletest/clean: TEST/lib/googletest/CMakeFiles/gtest_main.dir/clean
+
+.PHONY : TEST/lib/googletest/clean
+
+# Convenience name for "preinstall" pass in the directory.
+TEST/lib/googletest/preinstall:
+
+.PHONY : TEST/lib/googletest/preinstall
+
+#=============================================================================
+# Target rules for target TEST/lib/googletest/CMakeFiles/gtest.dir
+
+# All Build rule for target.
+TEST/lib/googletest/CMakeFiles/gtest.dir/all:
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest.dir\build.make TEST/lib/googletest/CMakeFiles/gtest.dir/depend
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest.dir\build.make TEST/lib/googletest/CMakeFiles/gtest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=9,10 "Built target gtest"
+.PHONY : TEST/lib/googletest/CMakeFiles/gtest.dir/all
+
+# Include target in all.
+all: TEST/lib/googletest/CMakeFiles/gtest.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+TEST/lib/googletest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 2
+	$(MAKE) -f CMakeFiles\Makefile2 TEST/lib/googletest/CMakeFiles/gtest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 0
+.PHONY : TEST/lib/googletest/CMakeFiles/gtest.dir/rule
+
+# Convenience name for target.
+gtest: TEST/lib/googletest/CMakeFiles/gtest.dir/rule
+
+.PHONY : gtest
+
+# clean rule for target.
+TEST/lib/googletest/CMakeFiles/gtest.dir/clean:
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest.dir\build.make TEST/lib/googletest/CMakeFiles/gtest.dir/clean
+.PHONY : TEST/lib/googletest/CMakeFiles/gtest.dir/clean
+
+# clean rule for target.
+clean: TEST/lib/googletest/CMakeFiles/gtest.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target TEST/lib/googletest/CMakeFiles/gtest_main.dir
+
+# All Build rule for target.
+TEST/lib/googletest/CMakeFiles/gtest_main.dir/all: TEST/lib/googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest_main.dir\build.make TEST/lib/googletest/CMakeFiles/gtest_main.dir/depend
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest_main.dir\build.make TEST/lib/googletest/CMakeFiles/gtest_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=11,12 "Built target gtest_main"
+.PHONY : TEST/lib/googletest/CMakeFiles/gtest_main.dir/all
+
+# Include target in all.
+all: TEST/lib/googletest/CMakeFiles/gtest_main.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+TEST/lib/googletest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 4
+	$(MAKE) -f CMakeFiles\Makefile2 TEST/lib/googletest/CMakeFiles/gtest_main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 0
+.PHONY : TEST/lib/googletest/CMakeFiles/gtest_main.dir/rule
+
+# Convenience name for target.
+gtest_main: TEST/lib/googletest/CMakeFiles/gtest_main.dir/rule
+
+.PHONY : gtest_main
+
+# clean rule for target.
+TEST/lib/googletest/CMakeFiles/gtest_main.dir/clean:
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest_main.dir\build.make TEST/lib/googletest/CMakeFiles/gtest_main.dir/clean
+.PHONY : TEST/lib/googletest/CMakeFiles/gtest_main.dir/clean
+
+# clean rule for target.
+clean: TEST/lib/googletest/CMakeFiles/gtest_main.dir/clean
 
 .PHONY : clean
 

@@ -12,7 +12,7 @@ using namespace std;
 
 const char d_space='/';
 const char h_space=':';
-const char e_space='-';
+const char csv_space=';';
 
 
 
@@ -28,6 +28,7 @@ public:
     void setYear(int y);
     void setHour(int h, int m=0);
     void setEvent(string e);
+    void setdate(tm* d);
 
 
     string getDate()const;

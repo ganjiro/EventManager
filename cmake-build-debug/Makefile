@@ -110,6 +110,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named core
+
+# Build rule for target.
+core: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 core
+.PHONY : core
+
+# fast build rule for target.
+core/fast:
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/build
+.PHONY : core/fast
+
+#=============================================================================
 # Target rules for targets named EventManager
 
 # Build rule for target.
@@ -122,13 +135,52 @@ EventManager/fast:
 	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/build
 .PHONY : EventManager/fast
 
+#=============================================================================
+# Target rules for targets named Test
+
+# Build rule for target.
+Test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 Test
+.PHONY : Test
+
+# fast build rule for target.
+Test/fast:
+	$(MAKE) -f TEST\CMakeFiles\Test.dir\build.make TEST/CMakeFiles/Test.dir/build
+.PHONY : Test/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest.dir\build.make TEST/lib/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest_main.dir\build.make TEST/lib/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
 Event.obj: Event.cpp.obj
 
 .PHONY : Event.obj
 
 # target to build an object file
 Event.cpp.obj:
-	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/Event.cpp.obj
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/Event.cpp.obj
 .PHONY : Event.cpp.obj
 
 Event.i: Event.cpp.i
@@ -137,7 +189,7 @@ Event.i: Event.cpp.i
 
 # target to preprocess a source file
 Event.cpp.i:
-	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/Event.cpp.i
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/Event.cpp.i
 .PHONY : Event.cpp.i
 
 Event.s: Event.cpp.s
@@ -146,7 +198,7 @@ Event.s: Event.cpp.s
 
 # target to generate assembly for a file
 Event.cpp.s:
-	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/Event.cpp.s
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/Event.cpp.s
 .PHONY : Event.cpp.s
 
 EventManager.obj: EventManager.cpp.obj
@@ -155,7 +207,7 @@ EventManager.obj: EventManager.cpp.obj
 
 # target to build an object file
 EventManager.cpp.obj:
-	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/EventManager.cpp.obj
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/EventManager.cpp.obj
 .PHONY : EventManager.cpp.obj
 
 EventManager.i: EventManager.cpp.i
@@ -164,7 +216,7 @@ EventManager.i: EventManager.cpp.i
 
 # target to preprocess a source file
 EventManager.cpp.i:
-	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/EventManager.cpp.i
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/EventManager.cpp.i
 .PHONY : EventManager.cpp.i
 
 EventManager.s: EventManager.cpp.s
@@ -173,7 +225,7 @@ EventManager.s: EventManager.cpp.s
 
 # target to generate assembly for a file
 EventManager.cpp.s:
-	$(MAKE) -f CMakeFiles\EventManager.dir\build.make CMakeFiles/EventManager.dir/EventManager.cpp.s
+	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/EventManager.cpp.s
 .PHONY : EventManager.cpp.s
 
 main.obj: main.cpp.obj
@@ -209,9 +261,13 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
+	@echo ... core
 	@echo ... EventManager
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... Test
+	@echo ... gtest
+	@echo ... gtest_main
 	@echo ... Event.obj
 	@echo ... Event.i
 	@echo ... Event.s

@@ -72,6 +72,13 @@ int Event::getDay() const {
     return date->tm_mday;
 }
 
+void Event::setdate(tm *d) {
+
+    delete [] date;
+    date=d;
+
+}
+
 int Event::getMonth() const {
     return date->tm_mon;
 }
