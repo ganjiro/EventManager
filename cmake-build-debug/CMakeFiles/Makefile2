@@ -70,7 +70,7 @@ CMAKE_BINARY_DIR = C:\Users\girol\Desktop\EventManager\cmake-build-debug
 CMakeFiles/core.dir/all:
 	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/depend
 	$(MAKE) -f CMakeFiles\core.dir\build.make CMakeFiles/core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=6,7,8 "Built target core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=7,8,9 "Built target core"
 .PHONY : CMakeFiles/core.dir/all
 
 # Include target in all.
@@ -166,7 +166,7 @@ TEST/CMakeFiles/Test.dir/all: TEST/lib/googletest/CMakeFiles/gtest.dir/all
 TEST/CMakeFiles/Test.dir/all: TEST/lib/googletest/CMakeFiles/gtest_main.dir/all
 	$(MAKE) -f TEST\CMakeFiles\Test.dir\build.make TEST/CMakeFiles/Test.dir/depend
 	$(MAKE) -f TEST\CMakeFiles\Test.dir\build.make TEST/CMakeFiles/Test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=3,4,5 "Built target Test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=3,4,5,6 "Built target Test"
 .PHONY : TEST/CMakeFiles/Test.dir/all
 
 # Include target in all.
@@ -176,7 +176,7 @@ all: TEST/CMakeFiles/Test.dir/all
 
 # Build rule for subdir invocation for target.
 TEST/CMakeFiles/Test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 11
 	$(MAKE) -f CMakeFiles\Makefile2 TEST/CMakeFiles/Test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles 0
 .PHONY : TEST/CMakeFiles/Test.dir/rule
@@ -223,7 +223,7 @@ TEST/lib/googletest/preinstall:
 TEST/lib/googletest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest.dir\build.make TEST/lib/googletest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest.dir\build.make TEST/lib/googletest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=9,10 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=10,11 "Built target gtest"
 .PHONY : TEST/lib/googletest/CMakeFiles/gtest.dir/all
 
 # Include target in all.
@@ -260,7 +260,7 @@ clean: TEST/lib/googletest/CMakeFiles/gtest.dir/clean
 TEST/lib/googletest/CMakeFiles/gtest_main.dir/all: TEST/lib/googletest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest_main.dir\build.make TEST/lib/googletest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f TEST\lib\googletest\CMakeFiles\gtest_main.dir\build.make TEST/lib/googletest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=11,12 "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\girol\Desktop\EventManager\cmake-build-debug\CMakeFiles --progress-num=12,13 "Built target gtest_main"
 .PHONY : TEST/lib/googletest/CMakeFiles/gtest_main.dir/all
 
 # Include target in all.

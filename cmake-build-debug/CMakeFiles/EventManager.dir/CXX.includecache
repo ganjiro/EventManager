@@ -6,3 +6,29 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/girol/Desktop/EventManager/Event.h
+time.h
+-
+iostream
+-
+algorithm
+-
+
+C:/Users/girol/Desktop/EventManager/EventManager.h
+Event.h
+C:/Users/girol/Desktop/EventManager/Event.h
+fstream
+-
+vector
+-
+exception
+-
+
+C:/Users/girol/Desktop/EventManager/main.cpp
+iostream
+-
+memory
+-
+EventManager.h
+C:/Users/girol/Desktop/EventManager/EventManager.h
+

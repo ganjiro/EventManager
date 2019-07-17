@@ -6,7 +6,7 @@
 
 void Event::setDay(int d) {
 
-    this->date->tm_mday=d;
+    date->tm_mday=d;
 
 }
 
@@ -71,7 +71,7 @@ Event::Event(string e): eventText(move(e)) {
 }
 
 bool Event::operator==(const Event &e) {
-
+    cout<<"diop"<<(eventText==e.eventText?"saas":"suus")<<endl;
     return eventText==e.eventText;
 }
 
@@ -104,6 +104,14 @@ string Event::getOutputDate() const {
     ris+=to_string(date->tm_hour)+":";
     ris+=to_string(date->tm_min);
     return ris;
+}
+
+bool Event::isDone() const {
+    return done;
+}
+
+void Event::setDone(bool done) {
+    Event::done = done;
 }
 
 

@@ -3,13 +3,18 @@
 #include "EventManager.h"
 
 int main() {
-    auto a=new EventManager();
+
+
+
+
+
+ auto a=make_unique<EventManager>();
 
     a->printAllEvents();
+    int x=a->searchEvent("Esame");
+    a->editEvent(x,"Lezione");
+    a->editEvent("Lezione", "Esercizio");
+    a->editEventDate("TEST",17,7,2019,17,30);
 
-
-    int x=a->searchEvent("ciao");
-    delete a;
-
-    return x;
+    return 0;
 }

@@ -8,18 +8,23 @@ int linecount=0;
 void EventManager::loadLines() {
     try {
         linecount=0;
-        string line,data,ora,evento;
+        string line,data,ora,evento,check;
         int a;
         while (getline(saveFile, line)) {
             linecount++;
+
+
+
             a = line.find(csv_space);
-
-
             data=line.substr(0, a);
             line = line.substr(a + 1);
             a = line.find(csv_space);
             ora=line.substr(0, a);
-            evento = line.substr(a + 1);
+            line = line.substr(a + 1);
+            a = line.find(csv_space);
+            evento = line.substr(0, a);
+            check = line.substr(a + 1);
+
             Event* event = new Event(evento);
 
 
@@ -39,6 +44,8 @@ void EventManager::loadLines() {
             auto c = ora.substr(a, ora.length());
             event->setHour(stoi(ora.substr(0, a)), stoi(ora.substr(a + 1, ora.length())));
 
+            event->setDone(stoi(check));
+
             events.emplace_back(event);
 
         }
@@ -51,11 +58,11 @@ void EventManager::loadLines() {
 
 EventManager::~EventManager() {
     string line;
-    saveFile.open("..\\Utils\\Events.txt",ios::out | ios::trunc);
+    saveFile.open(R"(C:\Users\girol\Desktop\EventManager\Utils\Events.txt)",ios::out | ios::trunc);
     if (saveFile) {
         for(const auto itr: events) {
             line = "";
-            line = (*itr).getOutputDate() + csv_space + (*itr).getEvent() + '\n';
+            line = (*itr).getOutputDate() + csv_space + (*itr).getEvent() +  csv_space + ((*itr).isDone()?'1':'0')+'\n';
             saveFile << line;
         }
         saveFile.close();
@@ -114,9 +121,15 @@ void EventManager::newEvent(string e) {
 
 bool EventManager::editEvent(string old_e, string e) {
     auto ris=false;
-    auto itr=find(events.begin(),events.end(), new Event(move(old_e)));
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
 
-    if (*itr != nullptr){
+        if((*itr)->getEvent()==e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
         ris=true;
         (*itr)->setEvent(move(e));
 
@@ -137,12 +150,18 @@ bool EventManager::editEvent(int indice, string e) {
 
 bool EventManager::editEventDate(string old_e, int d, int m, int y, int h, int mi) {
     auto ris=false;
-    auto itr=find(events.begin(),events.end(), new Event(move(old_e)));
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
 
-    if (*itr != nullptr) {
+        if((*itr)->getEvent()==old_e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
         ris = true;
-        (*itr)->setHour(h,mi);
         (*itr)->setMonth(m);
+        (*itr)->setHour(h,mi);
         (*itr)->setYear(y);
         (*itr)->setDay(d);
     }
@@ -165,9 +184,15 @@ bool EventManager::editEventDate(int indice, int d, int m, int y, int h, int mi)
 
 bool EventManager::editEventDate(string old_e, tm *d) {
     auto ris=false;
-    auto itr=find(events.begin(),events.end(), new Event(move(old_e)));
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
 
-    if (*itr != nullptr) {
+        if((*itr)->getEvent()==old_e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
         ris = true;
         (*itr)->setdate(d);
     }
@@ -187,25 +212,48 @@ bool EventManager::editEventDate(int indice, tm *d) {
 
 void EventManager::deleteEvent(string e) {
 
-    auto itr = find(events.begin(),events.end(),new Event(move(e)));
-    if(*itr!= nullptr) {
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
+
+        if((*itr)->getEvent()==e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
         events.erase(itr);
     }
 }
 
 void EventManager::deleteEvent(int indice) {
 
-    if (events[indice]!= nullptr){
-        events.erase(find(events.begin(),events.end(),events[indice]));
-    }
+    if (events[indice]!= nullptr) {
+        auto itr = events.begin();
+        for (; itr != events.end(); itr++) {
 
+            if ((*itr)->getEvent() == events[indice]->getEvent()) {
+                break;
+            }
+        }
+
+        if (itr != events.end()) {
+            events.erase(itr);
+        }
+    }
 }
 
 void EventManager::printevent(string e) {
 
-    auto itr = find(events.begin(),events.end(),new Event(move(e)));
-    if(*itr!= nullptr) {
-        cout<<(*itr)->getDate()<<' '<<(*itr)->getEvent()<<endl;
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
+
+        if((*itr)->getEvent()==e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
+        cout<<(*itr)->getDate()<<' '<<(*itr)->getEvent()<<" - "<<((*itr)->isDone()?"Fatto":"Da Fare")<<endl;
     }
 
 
@@ -214,7 +262,7 @@ void EventManager::printevent(string e) {
 void EventManager::printevent(int indice) {
 
     if (events[indice]!= nullptr){
-        cout<<events[indice]->getDate()<<' '<<events[indice]->getEvent()<<endl;
+        cout<<events[indice]->getDate()<<' '<<events[indice]->getEvent()<<" - "<<(events[indice]->isDone()?"Fatto":"Da Fare")<<endl;
     }
 
 }
@@ -222,21 +270,128 @@ void EventManager::printevent(int indice) {
 void EventManager::printAllEvents() {
 
     for (auto itr: events){
-        cout<<(*itr).getDate()<<' '<<(*itr).getEvent()<<endl;
+        cout<<(*itr).getDate()<<' '<<(*itr).getEvent()<<" - "<<((*itr).isDone()?"Fatto":"Da Fare")<<endl;
+    }
+
+
+}
+
+
+
+EventManager::EventManager(string path) {
+        saveFile.open(path);
+        if (saveFile) {
+            loadLines();
+            saveFile.close();
+        }
+
+}
+
+void EventManager::editEvent(vector<Event>::iterator begin, string e) {
+
+    (*begin).setEvent(e);
+
+}
+
+void EventManager::editEventDate(vector<Event>::iterator itr, int d, int m, int y, int h, int mi) {
+
+    (*itr).setHour(h,mi);
+    (*itr).setMonth(m);
+    (*itr).setYear(y);
+    (*itr).setDay(d);
+
+}
+
+void EventManager::setChecked(int i) {
+
+    events[i]->setDone(true);
+
+}
+
+void EventManager::setChecked(string e) {
+
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
+
+        if((*itr)->getEvent()==e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
+
+        (*itr)->setDone(true);
+
     }
 
 }
 
+void EventManager::setUNChecked(int i) {
+
+    events[i]->setDone(false);
+
+}
+
+void EventManager::setUNChecked(string e) {
+
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
+
+        if((*itr)->getEvent()==e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
+
+        (*itr)->setDone(false);
+
+    }
+
+}
+
+void EventManager::printevent(vector<Event>::const_iterator begin, vector<Event>::const_iterator end) {
+
+    for(auto itr=begin;itr!=end; itr++ ){
+
+        cout<<(*itr).getDate()<<' '<<(*itr).getEvent()<<' '<<((*itr).isDone()?"Fatto":"Da Fare")<<endl;
+
+    }
+}
+
 string EventManager::getEventDate(string e) {
-    return std::__cxx11::string();
+    string ris;
+    auto itr=events.begin();
+    for(;itr!=events.end();itr++){
+
+        if((*itr)->getEvent()==e){
+            break;
+        }
+    }
+
+    if (itr != events.end()){
+
+        ris=(*itr)->getDate();
+
+    }
+        return ris;
 }
 
 string EventManager::getEventDate(int i) {
-    return std::__cxx11::string();
+    string ris;
+
+    ris=events[i]->getDate();
+
+    return ris;
 }
 
+
 string EventManager::getEventText(int i) {
-    return std::__cxx11::string();
+    string ris;
+
+    ris=events[i]->getEvent();
+
+    return ris;
 }
 
 

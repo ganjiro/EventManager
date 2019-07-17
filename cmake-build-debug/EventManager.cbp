@@ -286,6 +286,9 @@
 		<Unit filename="C:/Users/girol/Desktop/EventManager/test/runAllTest.cpp">
 			<Option target="Test"/>
 		</Unit>
+		<Unit filename="C:/Users/girol/Desktop/EventManager/test/testEvent.cpp">
+			<Option target="Test"/>
+		</Unit>
 		<Unit filename="C:/Users/girol/Desktop/EventManager/test/testEventManager.cpp">
 			<Option target="Test"/>
 		</Unit>

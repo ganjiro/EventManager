@@ -32,6 +32,10 @@ public:
 
     string getDate()const;
     string getEvent()const;
+
+    bool isDone() const;
+
+    void setDone(bool done);
     int getDay()const;
     int getMonth()const;
     int getYear()const;
@@ -43,6 +47,7 @@ public:
 private:
     tm* date;
     string eventText;
+    bool done=false;
 };
 
 
