@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(test)
 
-set(SOURCE_FILES EventManager Event.cpp Event.h EventManager.cpp EventManager.h)
+set(SOURCE_FILES ToDoList Event.cpp Event.h ToDoList.cpp ToDoList.h Date.cpp Date.h Hour.cpp Hour.h)
 
-add_executable(EventManager main.cpp)
+add_executable(ToDoList main.cpp)
 
 add_library(core ${SOURCE_FILES})
 
-target_link_libraries(EventManager core)
+target_link_libraries(ToDoList core)

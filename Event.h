@@ -8,6 +8,8 @@
 #include <time.h>
 #include <iostream>
 #include <algorithm>
+#include "Hour.h"
+
 using namespace std;
 
 const char d_space='/';
@@ -18,34 +20,27 @@ const char csv_space=';';
 class Event {
 public:
 
-    Event(){ date=new tm; };
-    explicit Event(string e, tm* d): eventText(move(e)), date(d){};
+    explicit Event(string e, int h,int m): eventText(move(e)), ora(Hour(h,m)){};
     explicit Event(string e);
 
-    void setDay(int d);
-    void setMonth(int m);
-    void setYear(int y);
-    void setHour(int h, int m=0);
+    void setHour(int h);
     void setEvent(string e);
-    void setdate(tm* d);
+    void setMinute(int m);
 
 
-    string getDate()const;
+    string getHour()const;
+    string getMinute()const;
     string getEvent()const;
 
     bool isDone() const;
 
     void setDone(bool done);
-    int getDay()const;
-    int getMonth()const;
-    int getYear()const;
-    string getOutputDate()const;
-
+    string getOutputHour()const;
 
     bool operator==(const Event& e);
 
 private:
-    tm* date;
+    Hour ora;
     string eventText;
     bool done=false;
 };

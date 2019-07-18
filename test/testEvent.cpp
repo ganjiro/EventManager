@@ -15,5 +15,5 @@ TEST(Event, TestEvent) {
     ASSERT_EQ(true,a->isDone());
     ASSERT_EQ("Test1",a->getEvent());
     ASSERT_EQ(2023,a->getYear());
-
+    delete a;
 }
