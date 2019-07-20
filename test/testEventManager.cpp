@@ -15,7 +15,7 @@ TEST(EventManager, SaveTest) {
     auto b= new ToDoList("Pag");
     ASSERT_EQ("18/7/2019",a->searchEventDate("Saldo") );
     a->setChecked("18/07/2019","Saldo");
-    ASSERT_TRUE(a->ische;
+    ASSERT_TRUE(a->isDone("18/07/2019","Saldo"));
     delete b;
 
 }
