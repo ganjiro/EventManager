@@ -21,7 +21,6 @@ public:
         if (saveFile) {
             loadLines(saveFile);
             saveFile.close();
-            cout<<"ciao";
         }
         else{
             FILE* tmp;
@@ -38,26 +37,32 @@ public:
     void newEvent(string e, int d, int m, int y, int h, int mi);
     void newEvent(string e, string d,int h, int m=0);
 
-    void editEventName(string old_e, string e);
-    void editEventDate(string old_e, int d, int m, int y, int h, int mi);
-    void editEventHour(string d, string e, int h, int m);
+    void editEventName(string old_e, string e, string d);
+    void editEventDate(string e,string old_d, int d, int m, int y, int h, int mi);
+    void editEventDate(string e, string old_d, string d, int h, int m);
+    void editEventHour(string e, string d, int h, int m);
 
-    void setChecked(string e);
-    void setUNChecked(string e);
+    void setChecked(string d,string e);
+    void setUNChecked(string d, string e);
 
-    void deleteEvent(string e);
+    void deleteEvent(string e,string d);
 
     void printevent(string e);
     void printAllEvents();
     void printEventsInDate(string d);
+    void printUndoneEvents();
+    void printDoneEvents();
 
     string getEventDate(string e);
+    string getEventHour(string d,string e);;
+    string getEventMinute(string d,string e);;
+    bool isDone(string d,string e);
 
     int eventCount();
     int dayEventCount(string d);
 
-
     ~ToDoList();
+
 private:
 
     multimap<Date,Event> events;

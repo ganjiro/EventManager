@@ -85,45 +85,66 @@ void ToDoList::newEvent(string e, int d, int m, int y, int h, int mi) {
 }
 
 
-void ToDoList::editEventName(string old_e, string e) {
 
-    for(auto itr : events){
+void ToDoList::editEventName(string old_e, string e,string d) {
 
-        if (itr.second.getEvent()==old_e){
+    auto itr = events.find(Date(d));
+    if(itr!=events.end()) {
+        while(itr->first.toString()==d) {
+            if (itr->second.getEvent() == e) {
+                bool done = itr->second.isDone();
+                int h = stoi(itr->second.getHour());
+                int m = stoi(itr->second.getMinute());
+                events.erase(itr);
+                auto tmp1 = Date(d);
+                auto tmp2 = Event(move(e), h, m);
+                tmp2.setDone(done);
+                break;
 
-            itr.second.setEvent(move(e));
-            break;
+            } else {
+                itr++;
+            }
         }
+
     }
 }
 
- void ToDoList::editEventDate(string e, int d, int m, int y, int h, int mi) {
+ void ToDoList::editEventDate(string e, string old_d, int d, int m, int y, int h, int mi) {
 
 
-    for(auto itr=events.begin();itr!=events.end();++itr){
-        if (itr->second.getEvent()==e){
-
+     auto itr = events.find(Date(old_d));
+     if(itr!=events.end()) {
+            bool done=itr->second.isDone();
             events.erase(itr);
             auto tmp1= Date(d,m,y);
             auto tmp2= Event(move(e),h,mi);
+            tmp2.setDone(done);
             events.insert(make_pair(tmp1,tmp2));
+        }
+    }
+
+
+
+
+void ToDoList::deleteEvent(string e,string d) {
+
+
+    auto itr = events.find(Date(d));
+    while(itr->first.toString()==d) {
+    if(itr!=events.end()) {
+        if(itr->second.getEvent()==e) {
+            events.erase(itr);
             break;
         }
-    }
-}
-
-
-
-
-void ToDoList::deleteEvent(string e) {
-
-    for (auto itr = events.begin(); itr != events.end(); ++itr) {
-        if (itr->second.getEvent() == e) {
-
-            events.erase(itr);
+        else {
+            itr++;
+        }
         }
     }
 }
+
+
+
 
 
 
@@ -154,11 +175,22 @@ void ToDoList::printAllEvents() {
 
 
 
-void ToDoList::setChecked(string e) {
+void ToDoList::setChecked(string d,string e) {
 
-    for (auto itr : events) {
-        if (itr.second.getEvent() == e) {
-            itr.second.setDone(true);
+    auto itr = events.find(Date(d));
+    if(itr!=events.end()) {
+        while(itr->first.toString()==d) {
+            if (itr->second.getEvent() == e) {
+                auto tmp1 = itr->first;
+                auto tmp2 = itr->second;
+                events.erase(itr);
+                tmp2.setDone(true);
+                events.insert(make_pair(tmp1, tmp2));
+                break;
+
+            } else {
+                itr++;
+            }
         }
 
     }
@@ -189,19 +221,181 @@ void ToDoList::newEvent(string e, string d, int h, int m) {
 
 
 
-    void ToDoList::setUNChecked(string e) {
+    void ToDoList::setUNChecked(string d, string e) {
 
-        for (auto itr : events) {
-            if (itr.second.getEvent() == e) {
-                itr.second.setDone(false);
+            auto itr = events.find(Date(d));
+            if(itr!=events.end()) {
+                while (itr->first.toString() == d) {
+                    if (itr->second.getEvent() == e) {
+                        auto tmp1 = itr->first;
+                        auto tmp2 = itr->second;
+                        events.erase(itr);
+                        tmp2.setDone(false);
+                        events.insert(make_pair(tmp1, tmp2));
+                        break;
+
+                    } else {
+                        itr++;
+                    }
+                }
+
+
             }
+}
 
+void ToDoList::editEventHour(string d, string e, int h, int m) {
+
+    auto itr = events.find(Date(d));
+    if(itr!=events.end()) {
+        while(itr->first.toString()==d) {
+            if (itr->second.getEvent() == e) {
+                auto tmp1 = itr->first;
+                auto tmp2 = itr->second;
+                events.erase(itr);
+                tmp2.setHour(h);
+                tmp2.setMinute(m);
+                events.insert(make_pair(tmp1, tmp2));
+                break;
+
+            } else {
+                itr++;
+            }
+        }
+
+    }
+}
+
+
+void ToDoList::printEventsInDate(string d) {
+
+    for (const auto& itr : events) {
+        if (itr.first.toString() == d) {
+
+            cout<<itr.first.toString()<<' '<<itr.second.getOutputHour()<<' '<<itr.second.getEvent()<<" - "<<(itr.second.isDone()?"Fatto":"Da Fare")<<endl;
+
+        }
+    }
+}
+
+int ToDoList::eventCount() {
+
+    return events.size();
+}
+
+int ToDoList::dayEventCount(string d) {
+    int ris=0;
+    for (const auto& itr : events) {
+        if (itr.first.toString() == d) {
+
+            ris++;
+        }
+    }
+    return ris;
+}
+
+void ToDoList::editEventDate(string e, string old_d, string d, int h, int m) {
+
+    auto itr = events.find(Date(old_d));
+    if(itr!=events.end()) {
+        while(itr->first.toString()==d) {
+            if (itr->second.getEvent() == e) {
+                bool done = itr->second.isDone();
+                events.erase(itr);
+                auto tmp1 = Date(d);
+                auto tmp2 = Event(move(e), h, m);
+                tmp2.setDone(done);
+                events.insert(make_pair(tmp1, tmp2));
+                break;
+            } else {
+                itr++;
+            }
+        }
+
+    }
+}
+
+void ToDoList::printUndoneEvents() {
+
+    for(const auto& itr : events) {
+
+        if (itr.second.isDone() == false) {
+
+            cout << itr.first.toString() << ' ' << itr.second.getOutputHour() << ' ' << itr.second.getEvent() << " - "
+                 << (itr.second.isDone() ? "Fatto" : "Da Fare") << endl;
+            break;
         }
     }
 
 
+}
 
+void ToDoList::printDoneEvents() {
 
+    for(const auto& itr : events) {
 
+        if (itr.second.isDone() == true) {
 
+            cout << itr.first.toString() << ' ' << itr.second.getOutputHour() << ' ' << itr.second.getEvent() << " - "
+                 << (itr.second.isDone() ? "Fatto" : "Da Fare") << endl;
+            break;
+        }
+    }
 
+}
+
+string ToDoList::getEventHour(string d, string e) {
+
+    string ris;
+    auto itr = events.find(Date(d));
+    if(itr!=events.end()) {
+        while(itr->first.toString()==d) {
+            if (itr->second.getEvent() == e) {
+                ris=itr->second.getHour();
+                break;
+            } else {
+                itr++;
+            }
+        }
+
+    }
+
+    return ris;
+}
+
+string ToDoList::getEventMinute(string d, string e) {
+    string ris;
+    auto itr = events.find(Date(d));
+    if(itr!=events.end()) {
+        while(itr->first.toString()==d) {
+            if (itr->second.getEvent() == e) {
+                ris=itr->second.getMinute();
+                break;
+            } else {
+                itr++;
+            }
+        }
+
+    }
+
+    return ris;
+}
+
+bool ToDoList::isDone(string d, string e) {
+
+    bool ris= false;
+    auto itr = events.find(Date(d));
+    if(itr!=events.end()) {
+        while(itr->first.toString()==d) {
+            if (itr->second.getEvent() == e) {
+                ris=itr->second.isDone();
+                break;
+            } else {
+                itr++;
+            }
+        }
+
+    }
+
+    return ris;
+}
+}

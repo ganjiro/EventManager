@@ -3,23 +3,42 @@
 
 #include "gtest/gtest.h"
 
-#include "../EventManager.h"
+#include "../ToDoList.h"
 
 
-TEST(EventManager, ManagerTest1) {
+TEST(EventManager, SaveTest) {
 
-    auto a= new EventManager(R"(C:\Users\girol\Desktop\EventManager\Utils\Events.txt)");
-    a->newEvent("MICC - Elaborato",17,7,2019,17,00);
-    ASSERT_LT(-1,a->searchEvent("MICC - Elaborato") );
+    auto a= new ToDoList("Pag");
+    a->newEvent("Saldo",18,7,2019,17,00);
+    EXPECT_EQ("18/7/2019",a->searchEventDate("Saldo") );
     delete a;
-
-    auto b= new EventManager(R"(C:\Users\girol\Desktop\EventManager\Utils\Events.txt)");
-    ASSERT_LT(-1,b->searchEvent("MICC - Elaborato") );
-    b->editEventDate("MICC - Elaborato",17,7,2019,17,30);
-    ASSERT_EQ("17/7/2019 17:30", b->getEventDate("MICC - Elaborato"));
+    auto b= new ToDoList("Pag");
+    ASSERT_EQ("18/7/2019",a->searchEventDate("Saldo") );
+    a->setChecked("18/07/2019","Saldo");
+    ASSERT_TRUE(a->ische;
     delete b;
 
-    auto c= new EventManager(R"(C:\Users\girol\Desktop\EventManager\Utils\Events.txt)");
-    ASSERT_EQ("17/7/2019 17:30", c->getEventDate("MICC - Elaborato"));
-    delete c;
+}
+
+class TodoTester : public ::testing::Test {
+
+protected:
+    virtual void SetUp() {
+        c.newEvent("Test1","10/10/2019",3,30);
+        c.newEvent("Test2","11/10/2019",4,30);
+        c.newEvent("Test4","12/10/2019",5,30);
+    }
+
+    ToDoList c=ToDoList("Test");
+};
+
+
+TEST_F (TodoTester, SaveTest) {
+
+    EXPECT_EQ(3,c.eventCount());
+    c.deleteEvent("Test1","10/10/2019");
+    ASSERT_GT(3,c.eventCount());
+    c.newEvent("Test4","12/10/2019",5,50);
+    ASSERT_LT(1,c.dayEventCount("12/10/2019"));
+
 }
