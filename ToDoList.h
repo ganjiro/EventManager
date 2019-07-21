@@ -38,16 +38,19 @@ public:
     void newEvent(string e, string d,int h, int m=0);
 
     void editEventName(string old_e, string e, string d);
-    void editEventDate(string e,string old_d, int d, int m, int y, int h, int mi);
-    void editEventDate(string e, string old_d, string d, int h, int m);
-    void editEventHour(string e, string d, int h, int m);
+    void editEventDate(string e,string old_d, int d, int m, int y);
+    void editEventDate(string e, string old_d, string d);
+    void editEventHour(string e, string d, int h);
+    void editEventMinute(string e, string d,int m);
 
     void setChecked(string d,string e);
     void setUNChecked(string d, string e);
 
     void deleteEvent(string e,string d);
+    void deleteAllEventInDate(string d);
+    void deleteAll();
 
-    void printevent(string e);
+    void printEvent(string e);
     void printAllEvents();
     void printEventsInDate(string d);
     void printUndoneEvents();
@@ -57,6 +60,7 @@ public:
     string getEventHour(string d,string e);;
     string getEventMinute(string d,string e);;
     bool isDone(string d,string e);
+    string getEventsInDate(string d);
 
     int eventCount();
     int dayEventCount(string d);

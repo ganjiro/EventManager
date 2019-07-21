@@ -11,11 +11,21 @@ TEST(EventManager, SaveTest) {
     auto a= new ToDoList("Pag");
     a->newEvent("Saldo",18,7,2019,17,00);
     EXPECT_EQ("18/7/2019",a->searchEventDate("Saldo") );
+
     delete a;
+
     auto b= new ToDoList("Pag");
-    ASSERT_EQ("18/7/2019",a->searchEventDate("Saldo") );
-    a->setChecked("18/07/2019","Saldo");
-    ASSERT_TRUE(a->isDone("18/07/2019","Saldo"));
+    ASSERT_EQ("18/7/2019",b->searchEventDate("Saldo") );
+    b->setChecked("18/7/2019","Saldo");
+    ASSERT_TRUE(b->isDone("18/7/2019","Saldo"));
+    b->newEvent("Partenza","2/8/2019",22,0);
+    b->editEventHour("Partenza","2/8/2019",23);
+    ASSERT_EQ("23",b->getEventHour("2/8/2019","Partenza"));
+    b->editEventName("Partenza","Ritrovo","2/8/2019");
+    EXPECT_EQ("Ritrovo-Da Fare\n",b->getEventsInDate("2/8/2019"));
+    b->editEventDate("Ritrovo","2/8/2019","3/8/2019");
+    ASSERT_LT("2/08/2019",b->getEventDate("Ritrovo"));
+
     delete b;
 
 }
