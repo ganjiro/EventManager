@@ -13,40 +13,39 @@
 
 class ToDoList {
 public:
-    explicit ToDoList(string n): name(n){
+    explicit ToDoList(string n) : name(n) {
         fstream saveFile;
-        saveFile.open("./_SaveFiles/"+n+".txt");
+        saveFile.open("./_SaveFiles/" + n + ".txt");
 
 
         if (saveFile) {
             loadLines(saveFile);
             saveFile.close();
-        }
-        else{
-            FILE* tmp;
-            string a="./_SaveFiles/"+n+".txt";
-            tmp=fopen(a.c_str(),"w");
+        } else {
+            FILE *tmp;
+            string a = "./_SaveFiles/" + n + ".txt";
+            tmp = fopen(a.c_str(), "w");
             fclose(tmp);
         }
     }
 
-    void loadLines(fstream& saveFile);
+    void loadLines(fstream &saveFile);
 
     string searchEventDate(string e);
 
     void newEvent(string e, int d, int m, int y, int h, int mi);
-    void newEvent(string e, string d,int h, int m=0);
+    void newEvent(string e, string d, int h, int m = 0);
 
     void editEventName(string old_e, string e, string d);
-    void editEventDate(string e,string old_d, int d, int m, int y);
+    void editEventDate(string e, string old_d, int d, int m, int y);
     void editEventDate(string e, string old_d, string d);
     void editEventHour(string e, string d, int h);
-    void editEventMinute(string e, string d,int m);
+    void editEventMinute(string e, string d, int m);
 
-    void setChecked(string d,string e);
+    void setChecked(string d, string e);
     void setUNChecked(string d, string e);
 
-    void deleteEvent(string e,string d);
+    void deleteEvent(string e, string d);
     void deleteAllEventInDate(string d);
     void deleteAll();
 
@@ -57,9 +56,9 @@ public:
     void printDoneEvents();
 
     string getEventDate(string e);
-    string getEventHour(string d,string e);;
-    string getEventMinute(string d,string e);;
-    bool isDone(string d,string e);
+    string getEventHour(string d, string e);;
+    string getEventMinute(string d, string e);;
+    bool isDone(string d, string e);
     string getEventsInDate(string d);
 
     int eventCount();
@@ -69,7 +68,7 @@ public:
 
 private:
 
-    multimap<Date,Event> events;
+    multimap<Date, Event> events;
     string name;
 };
 

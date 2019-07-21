@@ -4,27 +4,26 @@
 
 #include "Event.h"
 
-auto now=time(nullptr);
+auto now = time(nullptr);
 
-tm* a=gmtime(&now);
+tm *a = gmtime(&now);
 
 
 void Event::setEvent(string e) {
 
-    eventText=move(e);
+    eventText = move(e);
 
 }
 
 
-string Event::getEvent() const{
+string Event::getEvent() const {
     return eventText;
 }
 
-Event::Event(string e): eventText(move(e)), ora(Hour(a->tm_hour,a->tm_min)){}
+Event::Event(string e) : eventText(move(e)), ora(Hour(a->tm_hour, a->tm_min)) {}
 
 bool Event::operator==(const Event &e) {
-    cout<<"diop"<<(eventText==e.eventText?"saas":"suus")<<endl;
-    return eventText==e.eventText;
+    return eventText == e.eventText;
 }
 
 
@@ -58,7 +57,7 @@ string Event::getMinute() const {
 }
 
 string Event::getOutputHour() const {
-    return to_string(ora.getHours())+':'+to_string(ora.getMinutes());
+    return to_string(ora.getHours()) + ':' + to_string(ora.getMinutes());
 }
 
 
